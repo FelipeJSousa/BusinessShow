@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="imagens")
-public class Imagem extends AbstractEntity{
+public class Imagem extends AbstractEntity<Integer>{
 
     @Column(name="diretorio", length = 250, nullable = false )
     private String diretorio;

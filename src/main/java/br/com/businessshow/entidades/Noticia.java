@@ -25,13 +25,13 @@ public class Noticia extends AbstractEntity<Integer> {
     private boolean ativo;
 
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "noticiaimagem")
-    private List<Imagem> listaImagem;
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            })
+//    @JoinTable(name = "noticiaimagem")
+//    private List<Imagem> listaImagem;
 
     public String getTitulo() {
         return titulo;

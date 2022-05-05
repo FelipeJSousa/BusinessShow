@@ -21,21 +21,21 @@ public class Produto extends AbstractEntity<Integer>  {
 	@Column(name="valor", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
     private BigDecimal valor;
 
-	@ManyToMany(fetch = FetchType.LAZY,
-			cascade = {
-					CascadeType.PERSIST,
-					CascadeType.MERGE
-			})
-	@JoinTable(name = "produtoimagem")
-	private List<Imagem> listaImagem;
+//	@ManyToMany(fetch = FetchType.LAZY,
+//			cascade = {
+//					CascadeType.PERSIST,
+//					CascadeType.MERGE
+//			})
+//	@JoinTable(name = "produtoimagem")
+//	private List<Imagem> listaImagem;
 
-	public List<Imagem> getListaImagem() {
-		return listaImagem;
-	}
-
-	public void setListaImagem(List<Imagem> listaImagem) {
-		this.listaImagem = listaImagem;
-	}
+//	public List<Imagem> getListaImagem() {
+//		return listaImagem;
+//	}
+//
+//	public void setListaImagem(List<Imagem> listaImagem) {
+//		this.listaImagem = listaImagem;
+//	}
 
 	@ManyToOne
 	@JoinColumn(name="categoria")

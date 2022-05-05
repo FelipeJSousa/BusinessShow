@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="empresas")
-public class Empresa extends AbstractEntity{
+public class Empresa extends AbstractEntity<Integer>{
 
     @Column(name="nome", length = 50, nullable = false )
     private String nome;
@@ -23,13 +23,13 @@ public class Empresa extends AbstractEntity{
     @OneToMany(mappedBy = "empresa")
     private List<Usuario> listaUsuario;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "empresaparceiro")
-    private List<Imagem> listaParceiro;
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            })
+//    @JoinTable(name = "empresaparceiro")
+//    private List<Imagem> listaParceiro;
 
     public List<Usuario> getListaUsuario() {
         return listaUsuario;

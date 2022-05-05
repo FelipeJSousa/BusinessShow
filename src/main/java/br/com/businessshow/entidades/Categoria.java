@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name="categoriaproduto")
+@Table(name="categorias")
 public class Categoria extends AbstractEntity<Integer> {
 	
 	@Column(name="nome", length = 50, nullable = false )
@@ -20,7 +20,7 @@ public class Categoria extends AbstractEntity<Integer> {
 	@Column(name="dataCriacao", columnDefinition = "DATE")
 	private LocalDate dataCriacao;
 
-	@Column(name="descricao", columnDefinition = "DATE")
+	@Column(name="dataAlteracao", columnDefinition = "DATE")
 	private LocalDate dataAlteracao;
 
 	@OneToMany(mappedBy = "categoria")

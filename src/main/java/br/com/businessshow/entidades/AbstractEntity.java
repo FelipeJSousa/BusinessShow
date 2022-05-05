@@ -1,11 +1,7 @@
 package br.com.businessshow.entidades;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-
+import javax.persistence.*;
 @SuppressWarnings("serial")
 @MappedSuperclass
 public abstract class AbstractEntity<ID extends Serializable> implements Serializable {
@@ -38,8 +34,8 @@ public abstract class AbstractEntity<ID extends Serializable> implements Seriali
         } else if (!id.equals(other.id))
             return false;
         return true;    }
-@Override
+    @Override
     public String toString() {
         return "id = " + id;
-    }    
+    }
 }

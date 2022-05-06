@@ -5,8 +5,10 @@ import br.com.businessshow.entidades.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,40 +21,32 @@ public class CategoriaController {
     CategoriaDao dao;
 
     @GetMapping("/prealterar")
-    public String prealterar(@RequestParam("id") int id,
-                             ModelMap model) {
-
+    public String prealterar(@RequestParam("id") int id, ModelMap model) {
         model.addAttribute("objcategoria",dao.findById(id));
-
         return "/categoria/cadastro";
-
     }
 
     @GetMapping("/excluir")
-    public String excluir(@RequestParam("id") int id,
-                          ModelMap model) {
-
+    public String excluir(@RequestParam("id") int id, ModelMap model) {
         dao.delete(id);
         return listar(model);
-
     }
 
     @ModelAttribute("listacategorias")
     public List<Categoria> getCategoria(){
         return dao.findAll();
-
     }
 
     @GetMapping("/listar")
     public String listar(ModelMap model) {
         model.addAttribute("lista", dao.findAll());
         return "/categoria/listar";
-
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Categoria objcategoria,
-                         ModelMap model) {
+    public String salvar(@Valid @ModelAttribute("objcategoria") Categoria objcategoria, BindingResult result, ModelMap model) {
+        if(result.hasErrors())
+            return "categoria/cadastro";
         if(objcategoria.getId()==null){
             objcategoria.setDataCriacao(LocalDate.now());
             objcategoria.setDataAlteracao(LocalDate.now());
@@ -66,14 +60,12 @@ public class CategoriaController {
         }
         model.addAttribute("objcategoria",objcategoria);
         model.addAttribute("mensagem", "Dados Salvos");
-        return "/categoria/listar";
+        return listar(model);
     }
 
     @GetMapping("/new")
     public String novo(ModelMap model) {
-
         model.addAttribute("objcategoria", new Categoria());
-
         return "categoria/cadastro";
     }
 }

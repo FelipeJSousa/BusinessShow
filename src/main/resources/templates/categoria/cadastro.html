@@ -21,28 +21,34 @@
 			<div class="form-group col-12">
 				<label>Nome</label>
 				<input th:field="*{nome}" type="text" class="form-control"
-				placeholder="Informe o nome"/>
+				   placeholder="Informe o nome"
+				   th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{nome}"></p></span>
+				</div>
 			</div>
-			
 		</div>
 		<div class="row">
 			<div class="form-group col-12">
 				<label>Descrição</label>
 				<input th:field="*{descricao}" type="text" class="form-control"
-				placeholder="Informe a descrição"/>
+					placeholder="Informe a descrição"
+					th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{nome}"></p></span>
+				</div>
 			</div>
-
 		</div>
 
 		<input type="hidden" th:field="*{id}"/>
 		
 		<div class="row">
 			<div class="form-group col-12">
-				
 				<input type="submit" class="btn btn-info"
 				value="Salvar"/>
 			</div>
-			
 		</div>
 	</form>
 	

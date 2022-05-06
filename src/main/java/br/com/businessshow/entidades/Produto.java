@@ -1,6 +1,7 @@
 package br.com.businessshow.entidades;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -37,6 +38,7 @@ public class Produto extends AbstractEntity<Integer>  {
 //		this.listaImagem = listaImagem;
 //	}
 
+	@NotNull(message = "Selecione a categoria do produto.")
 	@ManyToOne
 	@JoinColumn(name="categoria")
 	private Categoria categoria;

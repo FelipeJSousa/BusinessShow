@@ -3,7 +3,6 @@ package br.com.businessshow.entidades;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name="noticias")

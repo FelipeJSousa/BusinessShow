@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -48,14 +48,14 @@ public class CategoriaController {
         if(result.hasErrors())
             return "categoria/cadastro";
         if(objcategoria.getId()==null){
-            objcategoria.setDataCriacao(LocalDate.now());
-            objcategoria.setDataAlteracao(LocalDate.now());
+            objcategoria.setDataCriacao(LocalDateTime.now());
+            objcategoria.setDataAlteracao(LocalDateTime.now());
             dao.save(objcategoria);
         }
         else{
             var existente = dao.findById(objcategoria.getId());
             objcategoria.setDataCriacao(existente.getDataCriacao());
-            objcategoria.setDataAlteracao(LocalDate.now());
+            objcategoria.setDataAlteracao(LocalDateTime.now());
             dao.update(objcategoria);
         }
         model.addAttribute("objcategoria",objcategoria);

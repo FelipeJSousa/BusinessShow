@@ -9,10 +9,10 @@ import java.time.LocalDateTime;
 @Table(name="parceiros")
 public class Parceiro extends AbstractEntity<Integer>{
 
-    @Column(name="nomeFantasia", length = 50, nullable = false )
+    @Column(name="nomeFantasia", length = 100, nullable = false )
     private String nomeFantasia;
 
-    @Column(name="razaoSocial", length = 50, nullable = false )
+    @Column(name="razaoSocial", length = 100, nullable = false )
     private String razaoSocial;
 
     @Column(name="cnpj", length = 14, nullable = false )

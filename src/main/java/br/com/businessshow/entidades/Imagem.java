@@ -17,10 +17,10 @@ public class Imagem extends AbstractEntity<Integer>{
     @Column(name="ativo", columnDefinition = "TINYINT(1)")
     private boolean ativo;
 
-    @Column(name="dataCriacao", columnDefinition = "DATE")
+    @Column(name="dataCriacao", columnDefinition = "TIMESTAMP")
     private boolean dataCriacao;
 
-    @Column(name="dataAlteracao", columnDefinition = "DATE")
+    @Column(name="dataAlteracao", columnDefinition = "TIMESTAMP")
     private boolean dataAlteracao;
 
     public String getDiretorio() {

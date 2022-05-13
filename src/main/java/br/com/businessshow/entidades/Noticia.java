@@ -2,7 +2,7 @@ package br.com.businessshow.entidades;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="noticias")
@@ -14,11 +14,11 @@ public class Noticia extends AbstractEntity<Integer> {
     @Column(name="conteudo", length = 150, nullable = false )
     private String conteudo;
 
-    @Column(name="dataCriacao", columnDefinition = "DATE")
-    private LocalDate dataCriacao;
+    @Column(name="dataCriacao", columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataCriacao;
 
-    @Column(name="dataAlteracao", columnDefinition = "DATE")
-    private LocalDate dataAlteracao;
+    @Column(name="dataAlteracao", columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataAlteracao;
 
     @Column(name="ativo", columnDefinition = "TINYINT(1)")
     private boolean ativo;
@@ -48,19 +48,19 @@ public class Noticia extends AbstractEntity<Integer> {
         this.conteudo = conteudo;
     }
 
-    public LocalDate getDataCriacao() {
+    public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
-    public LocalDate getDataAlteracao() {
+    public LocalDateTime getDataAlteracao() {
         return dataAlteracao;
     }
 
-    public void setDataAlteracao(LocalDate dataAlteracao) {
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
     }
 

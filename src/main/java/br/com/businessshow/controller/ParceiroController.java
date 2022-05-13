@@ -42,7 +42,7 @@ public class ParceiroController {
 
     @GetMapping("/listar")
     public String listar(ModelMap model) {
-        model.addAttribute("lista", dao.findAll());
+        model.addAttribute("lista", dao.getAtivos());
         return "/parceiro/listar";
     }
 

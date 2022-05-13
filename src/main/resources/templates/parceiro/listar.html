@@ -25,7 +25,7 @@
 		<th>Razão Social</th>
 		<th>Nome Fantasia</th>
 		<th>CNPJ</th>
-		<th>Ativo</th>
+		<th th:if="${user?.ehAdm == true}">Ativo</th>
 		<th>Data Criacao</th>
 		<th>Data Alteracao</th>
 		<th></th>
@@ -37,7 +37,7 @@
 			<td th:text="${p.razaoSocial}"></td>
 			<td th:text="${p.nomeFantasia}"></td>
 			<td th:text="${p.cnpj}"></td>
-			<td th:text="${p.ativo}"></td>
+			<td th:if="${user?.ehAdm == true}" th:text="${p.ativo}"></td>
 			<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}" ></td>
 			<td th:text="${#temporals.format(p.dataAlteracao, 'dd/MM/yyyy')}" ></td>
 			<td><a th:href="@{/parceiro/prealterar(id=${p.id})}">Alterar</a></td>

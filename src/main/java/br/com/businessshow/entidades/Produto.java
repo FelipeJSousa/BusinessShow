@@ -3,7 +3,7 @@ package br.com.businessshow.entidades;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,8 +16,8 @@ public class Produto extends AbstractEntity<Integer>  {
 	@Column(name = "qtde", nullable = false)
     private Integer qtde;
      
-	@Column(name="data", nullable = false, columnDefinition = "DATE")
-    private LocalDate data;
+	@Column(name="data", nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime data;
     
 	@Column(name="valor", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
     private BigDecimal valor;
@@ -68,11 +68,11 @@ public class Produto extends AbstractEntity<Integer>  {
 		this.qtde = qtde;
 	}
 
-	public LocalDate getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 

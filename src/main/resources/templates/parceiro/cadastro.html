@@ -9,35 +9,47 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Categoria - Cadastro</title>
+    <title>Parceiro - Cadastro</title>
   </head>
   <body>
     <div th:include="layout :: header"></div>
     <div class="container">
-	<h2>Categoria</h2>
+	<h2>Parceiro</h2>
 	
-	<form th:object="${objcategoria}" method="post" th:action="@{/categoria/salvar}">
+	<form th:object="${objparceiro}" method="post" th:action="@{/parceiro/salvar}">
 		<div class="row">
 			<div class="form-group col-12">
-				<label>Nome</label>
-				<input th:field="*{nome}" type="text" class="form-control"
-				   placeholder="Informe o nome"
-				   th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"
+				<label>Razao Social</label>
+				<input th:field="*{razaoSocial}" type="text" class="form-control"
+				   placeholder="Informe a razao social."
+				   th:classappend="${#fields.hasErrors('razaoSocial')} ? 'is-invalid'"
 				/>
 				<div class="invalid-feedback">
-					<span><p th:errors="*{nome}"></p></span>
+					<span><p th:errors="*{razaoSocial}"></p></span>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-12">
-				<label>Descrição</label>
-				<input th:field="*{descricao}" type="text" class="form-control"
-					placeholder="Informe a descrição"
-					th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid'"
+				<label>Nome Fantasia</label>
+				<input th:field="*{nomeFantasia}" type="text" class="form-control"
+					placeholder="Informe o nome fantasia"
+					th:classappend="${#fields.hasErrors('nomeFantasia')} ? 'is-invalid'"
 				/>
 				<div class="invalid-feedback">
-					<span><p th:errors="*{nome}"></p></span>
+					<span><p th:errors="*{nomeFantasia}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12">
+				<label>Cnpj</label>
+				<input th:field="*{cnpj}" type="text" class="form-control"
+					placeholder="Informe o cnpj"
+					th:classappend="${#fields.hasErrors('cnpj')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{cnpj}"></p></span>
 				</div>
 			</div>
 		</div>

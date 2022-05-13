@@ -1,7 +1,7 @@
 package br.com.businessshow.entidades;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,11 +14,11 @@ public class Empresa extends AbstractEntity<Integer>{
     @Column(name="descricao", length = 150 )
     private String descricao;
 
-    @Column(name="dataCriacao", columnDefinition = "DATE")
-    private LocalDate dataCricao;
+    @Column(name="dataCriacao", columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataCricao;
 
-    @Column(name="dataAlteracao", columnDefinition = "DATE")
-    private LocalDate dataAlteracao;
+    @Column(name="dataAlteracao", columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataAlteracao;
 
     @OneToMany(mappedBy = "empresa")
     private List<Usuario> listaUsuario;
@@ -55,19 +55,19 @@ public class Empresa extends AbstractEntity<Integer>{
         this.descricao = descricao;
     }
 
-    public LocalDate getDataCricao() {
+    public LocalDateTime getDataCricao() {
         return dataCricao;
     }
 
-    public void setDataCricao(LocalDate dataCricao) {
+    public void setDataCricao(LocalDateTime dataCricao) {
         this.dataCricao = dataCricao;
     }
 
-    public LocalDate getDataAlteracao() {
+    public LocalDateTime getDataAlteracao() {
         return dataAlteracao;
     }
 
-    public void setDataAlteracao(LocalDate dataAlteracao) {
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
     }
 }

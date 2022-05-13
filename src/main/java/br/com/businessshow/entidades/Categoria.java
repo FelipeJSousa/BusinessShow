@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -25,11 +25,11 @@ public class Categoria extends AbstractEntity<Integer> {
 	@Column(name="descricao", length = 150 )
 	private String descricao;
 
-	@Column(name="dataCriacao", columnDefinition = "DATE")
-	private LocalDate dataCriacao;
+	@Column(name="dataCriacao", columnDefinition = "TIMESTAMP")
+	private LocalDateTime dataCriacao;
 
-	@Column(name="dataAlteracao", columnDefinition = "DATE")
-	private LocalDate dataAlteracao;
+	@Column(name="dataAlteracao", columnDefinition = "TIMESTAMP")
+	private LocalDateTime dataAlteracao;
 
 	@OneToMany(mappedBy = "categoria")
 	private List<Produto> listaprodutos;
@@ -58,19 +58,19 @@ public class Categoria extends AbstractEntity<Integer> {
 		this.nome = nome;
 	}
 
-	public LocalDate getDataCriacao() {
+	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public LocalDate getDataAlteracao() {
+	public LocalDateTime getDataAlteracao() {
 		return dataAlteracao;
 	}
 
-	public void setDataAlteracao(LocalDate dataAlteracao) {
+	public void setDataAlteracao(LocalDateTime dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 }

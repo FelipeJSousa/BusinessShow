@@ -28,6 +28,12 @@ public class Usuario extends AbstractEntity<Integer>{
     @Column(name="dataAlteracao", columnDefinition = "TIMESTAMP")
     private LocalDateTime dataAlteracao;
 
+    @Column(name="admin", columnDefinition = "TINYINT(1)")
+    private boolean admin;
+
+    @Column(name="senha", length = 60, nullable = false)
+    private String senha;
+
     @ManyToOne
     @JoinColumn(name="empresas")
     private Empresa empresa;
@@ -94,5 +100,21 @@ public class Usuario extends AbstractEntity<Integer>{
 
     public void setDataAlteracao(LocalDateTime dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public boolean isAdmin() {
+        return this.admin;
+    }
+
+    public void setEhAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

@@ -27,6 +27,11 @@ public class HomeController {
         return login();
     }
 
+    @GetMapping("/forbiden")
+    public String forbiden(){
+        return "/forbiden";
+    }
+
     @GetMapping("/home")
     public String home(ModelMap model) {
         model.addAttribute("usuario", dao.getUsuarioLogado().getNome());

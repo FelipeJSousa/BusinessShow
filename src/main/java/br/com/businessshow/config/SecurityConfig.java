@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/webjars/**", "/css/**", "/image/**", "/js/**").permitAll()
                 .antMatchers("/", "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css").permitAll()
-                .antMatchers("/parceiro/**", "/categoria/**").hasAuthority("GERENTE")
+                .antMatchers("/parceiro/**", "/categoria/**", "/usuario/**").hasAuthority("GERENTE")
                 .antMatchers("/home/**").hasAuthority("USUARIO")
                 .anyRequest().authenticated()
                 .and()
@@ -42,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/forbiden");
     }
 }

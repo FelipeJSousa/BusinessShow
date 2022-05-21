@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <!-- Meta tags Obrigatórias -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+        <th:block th:include="layout :: head"/>
         <title>Business Show</title>
     </head>
     <body>
-        <h1>Login</h1>
+        <div class="container p-5 my-2">
+            <h1 class="p-3 w-100 text-center shadow-sm mb-3">Business Show</h1>
+            <h3 class="w-100 text-center">Login</h3>
 
-        <form th:action="@{/login}" method="post">
-            <p th:if="${mensagem != null}" th:text="${mensagem}"/>
-            <p>
-            <label for="username">E-mail</label>
-            <input type="username" id="username" name="username"/>
-            </p>
-            <p>
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password"/>
-            </p>
-            <button type="submit" class="btn">Log in</button>
-        </form>
+            <form class="form-group px-5 d-flex flex-column align-items-center" th:action="@{/login}" method="post">
+                <div class="row my-1">
+                    <label for="username">E-mail</label>
+                    <input class="form-control px-5" type="username" id="username" name="username"/>
+                </div>
+                <div class="row my-1">
+                    <label for="password">Senha</label>
+                    <input class="form-control px-5" type="password" id="password" name="password"/>
+                </div>
+                <div class="row my-1">
+                    <p th:if="${mensagem != null}" th:text="${mensagem}"/>
+                </div>
+                <div class="row my-1 p-2">
+                    <button  type="submit" class="btn btn-primary">Entrar</button>
+                </div>
+            </form>
+            <div th:include="layout :: footer"></div>
+        </div>
 
-
-        <!-- JavaScript (Opcional) -->
-        <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <div th:include="layout :: scripts"></div>
     </body>
 </html>

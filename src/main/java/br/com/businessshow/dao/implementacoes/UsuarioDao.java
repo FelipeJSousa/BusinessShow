@@ -2,7 +2,6 @@ package br.com.businessshow.dao.implementacoes;
 
 import br.com.businessshow.dao.interfaces.IUsuarioDao;
 import br.com.businessshow.entidades.Usuario;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,9 +37,8 @@ public class UsuarioDao extends AbstractDao<Usuario,Integer> implements IUsuario
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario user = findByUserName(username);
-        List<GrantedAuthority> listaAdmin = AuthorityUtils.createAuthorityList("USER", "MANAGER");
-        List<GrantedAuthority> listaUser = AuthorityUtils.createAuthorityList("USER");
+        List<GrantedAuthority> listaAdmin = AuthorityUtils.createAuthorityList("USUARIO", "GERENTE");
+        List<GrantedAuthority> listaUser = AuthorityUtils.createAuthorityList("USUARIO");
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getSenha(), user.isAdmin() ? listaAdmin : listaUser);
-
     }
 }

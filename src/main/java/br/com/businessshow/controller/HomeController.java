@@ -1,7 +1,6 @@
 package br.com.businessshow.controller;
 
 import br.com.businessshow.dao.implementacoes.UsuarioDao;
-import br.com.businessshow.entidades.Categoria;
 import br.com.businessshow.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
@@ -24,16 +22,13 @@ public class HomeController {
         return "/login";
     }
 
-//    @PostMapping("/login")
-//    public String login(@Valid @ModelAttribute("login") Usuario login, BindingResult result, ModelMap model) {
-//
-//        dao.a
-//
-//        return index(model);
-//    }
+    @GetMapping("")
+    public String index() {
+        return login();
+    }
 
     @GetMapping("/home")
-    public String index(ModelMap model) {
+    public String home(ModelMap model) {
         model.addAttribute("usuario", dao.getUsuarioLogado().getNome());
         return "/home/index";
     }

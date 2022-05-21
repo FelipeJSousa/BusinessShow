@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+	<th:block th:include="layout :: head"/>
+    <title>Usuario - Cadastro</title>
+  </head>
+  <body>
+    <div th:include="layout :: header"></div>
+    <div class="container">
+	<h2>Usuario</h2>
+	
+	<form th:object="${objusuario}" method="post" th:action="@{/usuario/salvar}">
+		<div class="row py-2 d-flex align-items-center">
+			<div class="form-group col-6">
+				<label>Nome</label>
+				<input th:field="*{nome}" type="text" class="form-control"
+				   placeholder="Informe o nome"
+				   th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{nome}"></p></span>
+				</div>
+			</div>
+			<div class="form-group col-6">
+				<label>Sobrenome</label>
+				<input th:field="*{sobrenome}" type="text" class="form-control"
+				   placeholder="Informe o sobrenome"
+				   th:classappend="${#fields.hasErrors('sobrenome')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{sobrenome}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row py-2 d-flex align-items-center">
+			<div class="form-group col-4">
+				<label>CPF</label>
+				<input th:field="*{cpf}" type="text" class="form-control"
+					placeholder="Informe o CPF"
+					th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{cpf}"></p></span>
+				</div>
+			</div>
+			<div class="form-group col-4">
+				<label>Empresa</label>
+				<select class="form-select"
+						th:classappend="${#fields.hasErrors('empresa')} ? 'is-invalid'">
+					<option value="0">Selecione a Empresa</option>
+					<option th:each="e : ${listaEmpresa}"
+							th:value="${e.id}" th:text="${e.nome}"
+							th:selected="(${e.id}==*{empresa?.id})"></option>
+				</select>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{empresa}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row py-2 d-flex align-items-end">
+			<div class="form-group col-4">
+				<label>Email</label>
+				<input th:field="*{email}" type="text" class="form-control"
+					   placeholder="Informe o email"
+					   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{email}"></p></span>
+				</div>
+			</div>
+			<div class="form-group col-4">
+				<label>Senha</label>
+				<input th:field="*{senha}" type="password" class="form-control"
+					   placeholder="Informe a senha"
+					   th:classappend="${#fields.hasErrors('senha')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{senha}"></p></span>
+				</div>
+			</div>
+			<div class="form-check col-4">
+				<input th:field="*{admin}" type="checkbox" class="form-check-input align-self-center"
+					   th:classappend="${#fields.hasErrors('admin')} ? 'is-invalid'"
+					   id="admin"
+				/>
+				<label class="form-check-label" for="admin">
+					Administrador
+				</label>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{admin}"></p></span>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" th:field="*{id}"/>
+		
+		<div class="row py-2 d-flex align-items-center">
+			<div class="form-group col-12">
+				<input type="submit" class="btn btn-info"
+				value="Salvar"/>
+			</div>
+		</div>
+	</form>
+
+ 	<div th:include="layout :: footer"></div>
+ 	<div th:include="layout :: scripts"></div>
+  </body>
+</html>

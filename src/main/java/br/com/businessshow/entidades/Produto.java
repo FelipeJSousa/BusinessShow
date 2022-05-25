@@ -10,40 +10,64 @@ import java.util.List;
 @Table(name="produtos")
 public class Produto extends AbstractEntity<Integer>  {
 	
+	@Column(name = "nome", length = 150, nullable = false)
+    private String nome;
+
 	@Column(name = "descricao", length = 150, nullable = false)
     private String descricao;
      
 	@Column(name = "qtde", nullable = false)
     private Integer qtde;
      
-	@Column(name="data", nullable = false, columnDefinition = "TIMESTAMP")
-    private LocalDateTime data;
-    
+	@Column(name="dataCriacao", nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataCriacao;
+
+	@Column(name="dataAlteracao", nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataAlteracao;
+
 	@Column(name="valor", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
     private BigDecimal valor;
 
-//	@ManyToMany(fetch = FetchType.LAZY,
-//			cascade = {
-//					CascadeType.PERSIST,
-//					CascadeType.MERGE
-//			})
-//	@JoinTable(name = "produtoimagem")
-//	private List<Imagem> listaImagem;
+	@Column(name="ativo", columnDefinition = "TINYINT(1)")
+	private boolean ativo;
 
-//	public List<Imagem> getListaImagem() {
-//		return listaImagem;
-//	}
-//
-//	public void setListaImagem(List<Imagem> listaImagem) {
-//		this.listaImagem = listaImagem;
-//	}
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+			})
+	@JoinTable(name = "produtoimagem")
+	private List<Imagem> listaImagem;
 
 	@NotNull(message = "Selecione a categoria do produto.")
 	@ManyToOne
 	@JoinColumn(name="categoria")
 	private Categoria categoria;
-	
-	
+
+	public LocalDateTime getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(LocalDateTime dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public List<Imagem> getListaImagem() {
+		return listaImagem;
+	}
+
+	public void setListaImagem(List<Imagem> listaImagem) {
+		this.listaImagem = listaImagem;
+	}
+
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -54,6 +78,18 @@ public class Produto extends AbstractEntity<Integer>  {
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public String getDescricaoAbreviada() {
+		return this.getDescricao().substring(0,17) + "...";
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public void setDescricao(String descricao) {
@@ -68,12 +104,12 @@ public class Produto extends AbstractEntity<Integer>  {
 		this.qtde = qtde;
 	}
 
-	public LocalDateTime getData() {
-		return data;
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setData(LocalDateTime data) {
-		this.data = data;
+	public void setDataCriacao(LocalDateTime data) {
+		this.dataCriacao = data;
 	}
 
 	public BigDecimal getValor() {

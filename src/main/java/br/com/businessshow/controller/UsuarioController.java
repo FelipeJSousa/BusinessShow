@@ -33,7 +33,9 @@ public class UsuarioController {
 
     @GetMapping("/excluir")
     public String excluir(@RequestParam("id") int id, ModelMap model) {
-        dao.delete(id);
+        var objusuario = dao.findById(id);
+        objusuario.setAtivo(false);
+        dao.update(objusuario);
         return listar(model);
     }
 
@@ -44,7 +46,7 @@ public class UsuarioController {
 
     @GetMapping("/listar")
     public String listar(ModelMap model) {
-        model.addAttribute("lista", dao.findAll());
+        model.addAttribute("lista", dao.getAtivos());
         return "/usuario/listar";
     }
 
@@ -52,11 +54,13 @@ public class UsuarioController {
     public String salvar(@Valid @ModelAttribute("objusuario") Usuario objusuario, BindingResult result, ModelMap model) {
         if(result.hasErrors())
             return "usuario/cadastro";
+
+        objusuario.setAtivo(true);
+        objusuario.setDataCriacao(LocalDateTime.now());
+        objusuario.setDataAlteracao(LocalDateTime.now());
+
         if(objusuario.getId()==null){
             objusuario.EncodeSenha();
-            objusuario.setAtivo(true);
-            objusuario.setDataCriacao(LocalDateTime.now());
-            objusuario.setDataAlteracao(LocalDateTime.now());
             dao.save(objusuario);
         }
         else{
@@ -67,9 +71,6 @@ public class UsuarioController {
             else {
                 objusuario.EncodeSenha();
             }
-
-            objusuario.setDataCriacao(existente.getDataCriacao());
-            objusuario.setDataAlteracao(LocalDateTime.now());
             dao.update(objusuario);
         }
         model.addAttribute("objusuario",objusuario);

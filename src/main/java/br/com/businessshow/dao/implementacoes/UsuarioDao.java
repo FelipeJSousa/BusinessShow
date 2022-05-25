@@ -41,4 +41,9 @@ public class UsuarioDao extends AbstractDao<Usuario,Integer> implements IUsuario
         List<GrantedAuthority> listaUser = AuthorityUtils.createAuthorityList("USUARIO");
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getSenha(), user.isAdmin() ? listaAdmin : listaUser);
     }
+
+    @Override
+    public List<Usuario> getAtivos() {
+        return this.createQuery("SELECT U FROM Usuario U WHERE ativo = ?1", true);
+    }
 }

@@ -10,7 +10,7 @@
 		<h2>Usuario</h2>
 
 		<form th:object="${objusuario}" method="post" th:action="@{/usuario/salvar}" id="form">
-			<div class="row py-2 d-flex align-items-center">
+			<div class="row py-2 d-flex">
 				<div class="form-group col-6">
 					<label>Nome</label>
 					<input th:field="*{nome}" type="text" class="form-control"
@@ -32,10 +32,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="row py-2 d-flex align-items-center">
+			<div class="row py-2 d-flex">
 				<div class="form-group col-4">
 					<label>CPF</label>
-					<input th:field="*{cpf}" type="text" class="form-control"
+					<input th:field="*{cpf}" type="text" class="form-control cpf-mask"
 						placeholder="Informe o CPF"
 						th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'"
 					/>
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row py-2 d-flex align-items-end">
+			<div class="row py-2 d-flex">
 				<div class="form-group col-4">
 					<label>Email</label>
 					<input th:field="*{email}" type="text" class="form-control"
@@ -79,12 +79,12 @@
 						<span><p th:errors="*{senha}"></p></span>
 					</div>
 				</div>
-				<div class="form-check col-4">
+				<div class="form-check col-4 d-flex align-items-center">
 					<input th:field="*{admin}" name="admin" th:checked="${admin}" type="checkbox" class="form-check-input align-self-center"
 						   th:classappend="${#fields.hasErrors('admin')} ? 'is-invalid'"
 						   id="admin"
 					/>
-					<label class="form-check-label" for="admin">
+					<label class="form-check-label ms-1" for="admin">
 						Administrador
 					</label>
 					<div class="invalid-feedback">
@@ -94,7 +94,7 @@
 			</div>
 			<input type="hidden" th:field="*{id}"/>
 
-			<div class="row py-2 d-flex align-items-center">
+			<div class="row py-2 d-flex">
 				<div class="form-group col-12">
 					<input type="button" class="btn btn-info" onclick="ShowModal()"
 					value="Salvar" id="btnSalvar"/>
@@ -120,8 +120,13 @@
 			</div>
 		</div>
 	</div>
-
-	<script th:src="@{/js/usuario/usuario.js}"/>
+	<script th:src="@{/js/utils/cpfcnpj.js}"></script>
+	<script th:src="@{/js/usuario/usuario.js}"></script>
+	<script>
+		$(document).ready(function () {
+			$(".cpf-mask").mask('000.000.000-00', {reverse: true});
+		})
+	</script>
     <div th:include="layout :: footer"></div>
  	<div th:include="layout :: scripts"></div>
   </body>

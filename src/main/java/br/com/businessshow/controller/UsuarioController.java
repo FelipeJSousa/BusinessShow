@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -52,14 +54,29 @@ public class UsuarioController {
 
     @PostMapping("/salvar")
     public String salvar(@Valid @ModelAttribute("objusuario") Usuario objusuario, BindingResult result, ModelMap model) {
-        if(result.hasErrors())
+        if(objusuario.getEmpresa().getId() == 0)
+            result.addError(new FieldError("objusuario", "empresa", "Selecione uma Empresa."));
+
+        if(result.hasErrors()){
+            if(objusuario.getSenha() == "" && objusuario.getId()==null)
+                result.addError(new FieldError("objusuario", "senha", "Senha deve ser informada."));
+
+            model.addAttribute("listaEmpresa", empresaDao.findAll());
             return "usuario/cadastro";
+        }
 
         objusuario.setAtivo(true);
-        objusuario.setDataCriacao(LocalDateTime.now());
         objusuario.setDataAlteracao(LocalDateTime.now());
 
         if(objusuario.getId()==null){
+            if(objusuario.getSenha() == ""){
+                result.addError(new FieldError("objusuario", "senha", "Senha deve ser informada"));
+
+
+                model.addAttribute("listaEmpresa", empresaDao.findAll());
+                return "usuario/cadastro";
+            }
+            objusuario.setDataCriacao(LocalDateTime.now());
             objusuario.EncodeSenha();
             dao.save(objusuario);
         }
@@ -73,8 +90,7 @@ public class UsuarioController {
             }
             dao.update(objusuario);
         }
-        model.addAttribute("objusuario",objusuario);
-        model.addAttribute("mensagem", "Dados Salvos");
+
         return listar(model);
     }
 

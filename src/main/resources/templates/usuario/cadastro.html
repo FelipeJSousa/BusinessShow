@@ -46,6 +46,7 @@
 			<div class="form-group col-4">
 				<label>Empresa</label>
 				<select class="form-select"
+						name="empresa.id"
 						th:classappend="${#fields.hasErrors('empresa')} ? 'is-invalid'">
 					<option value="0">Selecione a Empresa</option>
 					<option th:each="e : ${listaEmpresa}"
@@ -79,7 +80,7 @@
 				</div>
 			</div>
 			<div class="form-check col-4">
-				<input th:field="*{admin}" type="checkbox" class="form-check-input align-self-center"
+				<input th:field="*{admin}" name="admin" th:checked="${admin}" type="checkbox" class="form-check-input align-self-center"
 					   th:classappend="${#fields.hasErrors('admin')} ? 'is-invalid'"
 					   id="admin"
 				/>

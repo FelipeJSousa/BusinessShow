@@ -1,6 +1,5 @@
 package br.com.businessshow.entidades;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -110,7 +109,11 @@ public class Usuario extends AbstractEntity<Integer>{
     }
 
     public void setSenha(String senha) {
-        this.senha = new BCryptPasswordEncoder().encode(senha);
+        this.senha = senha;
+    }
+
+    public void EncodeSenha() {
+        this.setSenha(new BCryptPasswordEncoder().encode(senha));
     }
 
     public boolean isAdmin() {

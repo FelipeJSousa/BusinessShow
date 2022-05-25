@@ -53,12 +53,21 @@ public class UsuarioController {
         if(result.hasErrors())
             return "usuario/cadastro";
         if(objusuario.getId()==null){
+            objusuario.EncodeSenha();
+            objusuario.setAtivo(true);
             objusuario.setDataCriacao(LocalDateTime.now());
             objusuario.setDataAlteracao(LocalDateTime.now());
             dao.save(objusuario);
         }
         else{
             var existente = dao.findById(objusuario.getId());
+            if(objusuario.getSenha() == "" ){
+                objusuario.setSenha(existente.getSenha());
+            }
+            else {
+                objusuario.EncodeSenha();
+            }
+
             objusuario.setDataCriacao(existente.getDataCriacao());
             objusuario.setDataAlteracao(LocalDateTime.now());
             dao.update(objusuario);

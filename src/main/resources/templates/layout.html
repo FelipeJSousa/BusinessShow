@@ -25,21 +25,24 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/home/">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${session.usuario.admin} == true">
                         <a class="nav-link" href="/categoria/listar">Categorias</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${session.usuario.admin} == true">
                         <a class="nav-link" href="/parceiro/listar">Parceiros</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${session.usuario.admin} == true">
                         <a class="nav-link" href="/usuario/listar">Usuarios</a>
                     </li>
                 </ul>
                 <div class="text-light d-flex justify-content-end align-items-center col-5" >
                     <div th:if="${session.usuario} != null">
-                        <span class="text-light d-inline-flex me-3">
-                            <i class="bi bi-person me-1"></i>
-                            <p class="m-0" th:text="${session.usuario?.nome} + ' ' + ${session.usuario?.sobrenome}"></p>
+                        <span class="text-light d-inline-flex me-3 align-items-center">
+                            <i class="bi bi-person me-2"></i>
+                            <span class="flex-column">
+                                <p class="m-0 text-center" style="font-size: 0.7rem" th:if="${session.usuario.admin} == true">Acesso Gerencial</p>
+                                <p class="m-0" th:text="${session.usuario?.nome} + ' ' + ${session.usuario?.sobrenome}"></p>
+                            </span>
                         </span>
                     </div>
                     <span class="align-items-center">

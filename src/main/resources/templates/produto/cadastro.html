@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+	<th:block th:include="layout :: head"/>
+    <title>Produto - Cadastro</title>
+  </head>
+  <body>
+    <div th:include="layout :: header"></div>
+    <div class="container">
+	<h2>Produto</h2>
+	
+	<form th:object="${objproduto}" method="post" th:action="@{/produto/salvar}">
+		<div class="row my-2">
+			<div class="form-group col-12">
+				<label>Nome</label>
+				<input th:field="*{nome}" type="text" class="form-control"
+				   placeholder="Informe o nome."
+				   th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{nome}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="form-group col-12">
+				<label>Descrição</label>
+				<textarea th:field="*{descricao}" maxlength="150" class="form-control"
+					placeholder="Informe a descrição."
+					th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{descricao}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row my-2">
+			<div class="form-group col-3">
+				<label>Quantidade</label>
+				<input th:field="*{qtde}" type="number" class="form-control"
+					placeholder="Informe a quantidade."
+					th:classappend="${#fields.hasErrors('qtde')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{qtde}"></p></span>
+				</div>
+			</div>
+			<div class="form-group col-4">
+				<label>Valor</label>
+				<input th:field="*{valor}" type="number" class="form-control"
+					placeholder="R$"
+					th:classappend="${#fields.hasErrors('valor')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{valor}"></p></span>
+				</div>
+			</div>
+			<div class="form-group col-5">
+				<label>Categoria</label>
+				<select class="form-select"
+						name="categoria.id"
+						th:classappend="${#fields.hasErrors('categoria')} ? 'is-invalid'">
+					<option value="0">Selecione a Categoria</option>
+					<option th:each="e : ${listaCategoria}"
+							th:value="${e.id}" th:text="${e.nome}"
+							th:selected="(${e.id}==*{categoria?.id})"></option>
+				</select>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{categoria}"></p></span>
+				</div>
+			</div>
+		</div>
+
+		<input type="hidden" th:field="*{id}"/>
+		
+			<div class="row my-2">
+			<div class="form-group col-12">
+				<input type="submit" class="btn btn-info"
+				value="Salvar"/>
+			</div>
+		</div>
+	</form>
+	
+
+
+	 <div th:include="layout :: footer"></div>
+	 </div>
+
+	<div th:include="layout :: scripts"></div>
+  </body>
+</html>

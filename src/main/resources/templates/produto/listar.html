@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<th:block th:include="layout :: head"/>
+	<title>Produtos</title>
+</head>
+<body>
+<div th:include="layout :: header"></div>
+<div class="container">
+	<h2>Produtos</h2>
+
+	<a class="btn btn-primary btn-lg m-3" role="button" aria-disabled="true" href="/produto/new">Novo</a>
+
+
+	<table class="table">
+		<thead>
+		<th>Código</th>
+		<th>Nome</th>
+		<th>Descrição</th>
+		<th>Categoria</th>
+		<th>Qtde</th>
+		<th>Valor Unitário</th>
+		<th th:if="${user?.ehAdm == true}">Ativo</th>
+		<th>Data Criacao</th>
+		<th>Data Alteracao</th>
+		<th></th>
+		<th></th>
+		</thead>
+		<tbody>
+		<tr th:each="p : ${lista}">
+			<td th:text="${p.id}"></td>
+			<td th:text="${p.nome}"></td>
+			<td th:text="${p.getDescricaoAbreviada()}"></td>
+			<td th:text="${p.categoria.nome}"></td>
+			<td th:text="${p.qtde}"></td>
+			<td th:text="${p.valor}"></td>
+			<td th:if="${user?.ehAdm == true}" th:text="${p.ativo}"></td>
+			<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}" ></td>
+			<td th:text="${#temporals.format(p.dataAlteracao, 'dd/MM/yyyy')}" ></td>
+			<td><a th:href="@{/produto/prealterar(id=${p.id})}">Alterar</a></td>
+			<td><a th:href="@{/produto/excluir(id=${p.id})}">Excluir</a></td>
+		</tr>
+		</tbody>
+	</table>
+	<div th:include="layout :: footer"></div>
+</div>
+
+
+<div th:include="layout :: scripts"></div>
+</body>
+</html>

@@ -15,7 +15,7 @@ public class Parceiro extends AbstractEntity<Integer>{
     @Column(name="razaoSocial", length = 100, nullable = false )
     private String razaoSocial;
 
-    @Column(name="cnpj", length = 14, nullable = false )
+    @Column(name="cnpj", length = 18, nullable = false )
     private String cnpj;
 
     @Column(name="dataCriacao", columnDefinition = "TIMESTAMP")

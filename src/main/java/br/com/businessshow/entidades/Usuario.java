@@ -1,21 +1,33 @@
 package br.com.businessshow.entidades;
 
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="usuarios")
 public class Usuario extends AbstractEntity<Integer>{
 
+    @NotBlank(message = "O nome é obrigatório.")
     @Column(name="nome", length = 50, nullable = false)
     private String nome;
 
-    @Column(name="sobrenome", length = 100, nullable = false)
+    @NotBlank(message = "O sobrenome é obrigatório.")
+    @Column(name="sobrenome", length = 50, nullable = false)
     private String sobrenome;
 
-    @Column(name="cpf", length = 11, nullable = false)
+    @CPF(message = "CPF deve ser válido.")
+    @Column(name="cpf", length = 14, nullable = false)
     private String cpf;
 
+    @NotBlank(message = "Email deve ser válido.")
+    @Email(message = "Email deve ser válido.")
     @Column(name="email", length = 100, nullable = false)
     private String email;
 
@@ -35,6 +47,7 @@ public class Usuario extends AbstractEntity<Integer>{
     private String senha;
 
     @ManyToOne
+    @NotNull(message = "Deve inserir uma empresa.")
     @JoinColumn(name="empresas")
     private Empresa empresa;
 
@@ -110,11 +123,15 @@ public class Usuario extends AbstractEntity<Integer>{
         this.senha = senha;
     }
 
+    public void EncodeSenha() {
+        this.setSenha(new BCryptPasswordEncoder().encode(senha));
+    }
+
     public boolean isAdmin() {
         return this.admin;
     }
 
-    public void setEhAdmin(boolean admin) {
+    public void setAdmin(boolean admin) {
         this.admin = admin;
     }
 }

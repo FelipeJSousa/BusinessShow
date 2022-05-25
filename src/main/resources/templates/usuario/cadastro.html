@@ -121,25 +121,7 @@
 		</div>
 	</div>
 
-	<script>
-		function ShowModal(){
-			if($('#id').val()>0 && !$('#senha').val() == false){
-				$('#modalAlterarSenha').modal('show');
-			}
-			else{
-				Submit();
-			}
-		}
-		function Cancelar(){
-			$('#senha').val('');
-			Submit();
-		}
-		function Submit(){
-			$('#form').submit();
-		}
-
-	</script>
-
+	<script th:src="@{/js/usuario/usuario.js}"/>
     <div th:include="layout :: footer"></div>
  	<div th:include="layout :: scripts"></div>
   </body>

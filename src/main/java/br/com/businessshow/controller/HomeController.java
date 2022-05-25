@@ -3,15 +3,15 @@ package br.com.businessshow.controller;
 import br.com.businessshow.dao.implementacoes.UsuarioDao;
 import br.com.businessshow.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
 
 @Controller
+@Scope("session")
 public class HomeController {
 
     @Autowired
@@ -33,8 +33,9 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(ModelMap model) {
-        model.addAttribute("usuario", dao.getUsuarioLogado().getNome());
+    public String home(ModelMap model, HttpSession session) {
+        var user = dao.getUsuarioLogado();
+        session.setAttribute("usuario", user);
         return "/home/index";
     }
 

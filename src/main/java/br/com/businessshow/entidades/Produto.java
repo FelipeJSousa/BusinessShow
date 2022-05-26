@@ -1,5 +1,7 @@
 package br.com.businessshow.entidades;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -26,6 +28,7 @@ public class Produto extends AbstractEntity<Integer>  {
     private LocalDateTime dataAlteracao;
 
 	@Column(name="valor", nullable = true, columnDefinition = "DECIMAL(10,2) DEFAULT 0.00")
+	@NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#0.00")
     private BigDecimal valor;
 
 	@Column(name="ativo", columnDefinition = "TINYINT(1)")

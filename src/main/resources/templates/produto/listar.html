@@ -34,7 +34,7 @@
 			<td th:text="${p.getDescricaoAbreviada()}"></td>
 			<td th:text="${p.categoria.nome}"></td>
 			<td th:text="${p.qtde}"></td>
-			<td th:text="${p.valor}"></td>
+			<td th:text="${p.valor}" class="money"></td>
 			<td th:if="${user?.ehAdm == true}" th:text="${p.ativo}"></td>
 			<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}" ></td>
 			<td th:text="${#temporals.format(p.dataAlteracao, 'dd/MM/yyyy')}" ></td>
@@ -46,7 +46,7 @@
 	<div th:include="layout :: footer"></div>
 </div>
 
-
+<script th:src="@{/js/utils/money.js}"></script>
 <div th:include="layout :: scripts"></div>
 </body>
 </html>

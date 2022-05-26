@@ -70,6 +70,7 @@ public class ProdutoController {
         }
         else{
             var existente = dao.findById(objproduto.getId());
+            objproduto.setDataCriacao(existente.getDataCriacao());
             dao.update(objproduto);
         }
 

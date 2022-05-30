@@ -1,13 +1,26 @@
 package br.com.businessshow.entidades;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="imagens")
 public class Imagem extends AbstractEntity<Integer>{
 
+    public Imagem(){
+        this.setAtivo(true);
+        this.setDataCriacao(LocalDateTime.now());
+    }
+
+    public Imagem(MultipartFile file){
+        super();
+        this.setDiretorio(System.getProperty("user.dir") +"\\src\\main\\resources\\static\\image\\" + file.getOriginalFilename());
+        this.setNome(file.getOriginalFilename());
+    }
     @Column(name="diretorio", length = 250, nullable = false )
     private String diretorio;
 
@@ -18,10 +31,10 @@ public class Imagem extends AbstractEntity<Integer>{
     private boolean ativo;
 
     @Column(name="dataCriacao", columnDefinition = "TIMESTAMP")
-    private boolean dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @Column(name="dataAlteracao", columnDefinition = "TIMESTAMP")
-    private boolean dataAlteracao;
+    private LocalDateTime dataAlteracao;
 
     public String getDiretorio() {
         return diretorio;
@@ -47,19 +60,11 @@ public class Imagem extends AbstractEntity<Integer>{
         this.ativo = ativo;
     }
 
-    public boolean isDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(boolean dataCriacao) {
+    public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
-    public boolean isDataAlteracao() {
-        return dataAlteracao;
-    }
-
-    public void setDataAlteracao(boolean dataAlteracao) {
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
     }
 }

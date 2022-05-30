@@ -17,7 +17,7 @@ public class Imagem extends AbstractEntity<Integer>{
     }
 
     public Imagem(MultipartFile file){
-        super();
+        this();
         this.setDiretorio(System.getProperty("user.dir") +"\\src\\main\\resources\\static\\image\\" + file.getOriginalFilename());
         this.setNome(file.getOriginalFilename());
     }

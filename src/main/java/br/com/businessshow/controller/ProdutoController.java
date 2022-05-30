@@ -73,8 +73,11 @@ public class ProdutoController {
             var obj = this.salvarImagens(file);
             listImagem.add(obj);
         }
-        if(listImagem.size() > 0)
+
+        if(listImagem.size() > 0){
             objproduto.setListaImagem(listImagem);
+        }
+
         objproduto.setAtivo(true);
         objproduto.setDataAlteracao(LocalDateTime.now());
 
@@ -84,6 +87,9 @@ public class ProdutoController {
         }
         else{
             var existente = dao.findById(objproduto.getId());
+            if(listImagem.size() < 1 ){
+                objproduto.setListaImagem(existente.getListaImagem());
+            }
             objproduto.setDataCriacao(existente.getDataCriacao());
             dao.update(objproduto);
         }

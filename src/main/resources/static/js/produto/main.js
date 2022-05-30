@@ -20,19 +20,3 @@ function previewFile() {
         }
     }
 }
-
-
-function saveImagem(imagem){
-    $.ajax({
-            method: "POST",
-            url: "http://localhost:8080" + "/imagem",
-            data: {file: imagem}
-        }
-    )
-    .done(function(resp){
-        console.log(resp)
-    })
-    .fail(function(jqXHR, textStatus, msg){
-        alert(msg);
-    });
-}

@@ -73,6 +73,9 @@
 		</div>
 		<div class="row my-2">
 			<span id="imgpreview" style="max-height: 8rem">
+				<span th:each="i : *{listaImagem}">
+					<img th:src="@{'/imagem/'+ ${i.id}}" class="img-thumbnail rounded col-2 h-100 me-3">
+				</span>
 			</span>
 			<span>
 				<label for="image" class="btn btn-outline-primary col-3 d-flex d-inline align-items-center">

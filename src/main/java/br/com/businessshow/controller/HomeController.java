@@ -1,5 +1,6 @@
 package br.com.businessshow.controller;
 
+import br.com.businessshow.dao.implementacoes.ProdutoDao;
 import br.com.businessshow.dao.implementacoes.UsuarioDao;
 import br.com.businessshow.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class HomeController {
 
     @Autowired
     private UsuarioDao dao;
+
+    @Autowired
+    private ProdutoDao daoProduto;
 
     @GetMapping("/login")
     public String login() {
@@ -36,6 +40,7 @@ public class HomeController {
     public String home(ModelMap model, HttpSession session) {
         var user = dao.getUsuarioLogado();
         session.setAttribute("usuario", user);
+        model.addAttribute("listaProduto", daoProduto.getAtivos());
         return "/home/index";
     }
 

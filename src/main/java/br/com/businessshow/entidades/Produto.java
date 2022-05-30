@@ -84,7 +84,8 @@ public class Produto extends AbstractEntity<Integer>  {
 	}
 
 	public String getDescricaoAbreviada() {
-		return this.getDescricao().substring(0,17) + "...";
+
+		return this.getDescricao().length() > 17 ? this.getDescricao().substring(0,17) + "..." : this.getDescricao();
 	}
 
 	public String getNome() {

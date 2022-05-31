@@ -46,13 +46,18 @@
         </div>
 
         <div class="row">
-            <span class="col-12 mb-2">
-                <h2 th:text="${produtoObj.Nome}"></h2>
+            <span class="col-12 mb-2 d-flex justify-content-between gap-2">
+                <span class="badge rounded-pill text-bg-success col-3 fs-6" th:text="${produtoObj.getCategoria().nome}"></span>
+                <span class="badge rounded-pill text-bg-success bg-opacity-75 text-black col-5 fs-6" th:text="'Quantidade disponível: ' + ${produtoObj.getQtde()}"></span>
+                <span class="badge rounded-pill text-bg-success bg-opacity-50 text-black col-3 fs-6" th:text="${#temporals.format(produtoObj.getDataCriacao(), 'dd/MM/yyyy')}"></span>
+            </span>
+            <span class="col-12 mb-2 d-flex justify-content-between">
+                <h2 class="col" th:text="${produtoObj.Nome}"></h2>
+                <h3 class="col-3 text-center" th:text="'R$ ' + ${produtoObj.Valor}"></h3>
             </span>
         </div>
         <div class="row mb-4">
-            <span class="col-6" th:text="${produtoObj.Descricao}"></span>
-            <span class="col-6" th:text="'R$ ' + ${produtoObj.Valor}"></span>
+            <h5 class="col-6 fw-normal" th:text="${produtoObj.Descricao}"></h5>
         </div>
 
 

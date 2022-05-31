@@ -12,12 +12,23 @@
 
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
-            <div class="card me-4 mb-4 col-sm-10  col-md-5 col-lg-2 p-2" th:each="p : ${listaProduto}">
-                <img th:if="${p?.getListaImagem()?.size() > 0}" th:src="@{'/imagem/'+ ${p?.getListaImagem()?.get(0)?.getId()}}" class="card-img-top">
+            <div class="card me-4 mb-4 col-sm-10  col-md-5 col-lg-3 p-2" th:each="p : ${listaProduto}">
+                <img th:if="${p?.getListaImagem()?.size() > 0}" th:src="@{'/imagem/'+ ${p?.getListaImagem()?.get(0)?.getId()}}" class="card-img-top mx-auto" style="width: auto; max-height: 10rem;min-height: 10rem">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${p.nome}"></h5>
-                    <p class="card-text" th:text="${p.getDescricaoLonga()}"></p>
-                    <a th:href="@{'/produto/detalhes?id='+ ${p?.getId()}}" class="btn btn-primary">visualizar</a>
+                    <span class="badge rounded-pill text-bg-success" th:text="${p.getCategoria().nome}"></span>
+                    <span class="d-flex justify-content-between">
+                        <h5 class="card-title my-4 me-2 col text-start" th:text="${p.nome}"></h5>
+                        <h5 class="card-title my-4 col text-end" th:text="'R$ ' + ${p.valor}"></h5>
+                    </span>
+                    <span class="d-flex justify-content-end">
+                        <a th:href="@{'/produto/detalhes?id='+ ${p?.getId()}}" class="btn btn-outline-success d-flex w-50 align-self-end justify-content-center">visualizar</a>
+                    </span>
+                </div>
+                <div class="card-footer">
+                    <span class="d-flex justify-content-between">
+                        <p th:text="'Qtde: ' + ${p.getQtde()}" class="text-start p-0 m-0"></p>
+                        <p th:text="'Data: ' + ${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}" class="text-end p-0 m-0"></p>
+                    </span>
                 </div>
             </div>
         </div>

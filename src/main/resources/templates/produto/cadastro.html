@@ -87,7 +87,8 @@
 		</div>
 
 		<input type="hidden" th:field="*{id}"/>
-		
+		<input type="hidden" th:field="*{empresa.id}" th:value="${session?.usuario?.empresa?.id}"/>
+
 			<div class="row my-2">
 			<div class="form-group col-12">
 				<input type="submit" class="btn btn-info"

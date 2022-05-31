@@ -47,6 +47,11 @@ public class Produto extends AbstractEntity<Integer>  {
 	@JoinColumn(name="categoria")
 	private Categoria categoria;
 
+	@NotNull(message = "Selecione a empresa do produto.")
+	@ManyToOne
+	@JoinColumn(name="empresa")
+	private Empresa empresa;
+
 	public LocalDateTime getDataAlteracao() {
 		return dataAlteracao;
 	}
@@ -128,8 +133,12 @@ public class Produto extends AbstractEntity<Integer>  {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-    
-    
-    
 
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
 }

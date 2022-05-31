@@ -56,8 +56,33 @@
                 <h3 class="col-3 text-center" th:text="'R$ ' + ${produtoObj.Valor}"></h3>
             </span>
         </div>
-        <div class="row mb-4">
+        <div class="row mb-4 d-flex justify-content-between" style="min-height: 3rem">
             <h5 class="col-6 fw-normal" th:text="${produtoObj.Descricao}"></h5>
+            <button class="btn btn-outline-success col-3" style="max-height: 3rem" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Visualizar Contatos da Empresa</button>
+        </div>
+
+
+
+        <div class="offcanvas offcanvas-bottom h-50" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header">
+                <h4 class="offcanvas-title" id="offcanvasBottomLabel" th:text="${produtoObj.empresa.getNome()}"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body ">
+                <span class="col-12 mb-2 d-flex justify-content-around">
+                    <span class="col-5">
+                        <h5 class="fw-bold" th:text="'Descrição'"></h5>
+                        <h6 class="fw-normal m-4" th:text="${produtoObj.empresa.getDescricao()}"></h6>
+                        <h6 class="fw-bold" th:text="'Quantidade de Produtos: ' + ${produtoObj.empresa.getListaProduto().size()}"></h6>
+                    </span>
+                    <span class="col-4">
+                        <h5 class="fw-bold" th:text="'Contatos'"></h5>
+                        <h6 class="" th:text="${produtoObj.empresa.getWhatsapp().length() > 0} ? 'Whatsapp: ' + ${produtoObj.empresa.getWhatsapp()} : 'Whatsapp: ' + '-'"></h6>
+                        <h6 class="" th:text="${produtoObj.empresa.getTelefone().length() > 0} ? 'Telefone: ' + ${produtoObj.empresa.getTelefone()} : 'Telefone: ' + '-'"></h6>
+                        <h6 class="" th:text="${produtoObj.empresa.getEmail().length() > 0} ? 'Email: ' + ${produtoObj.empresa.getEmail()} : 'Email: ' + '-'"></h6>
+                    </span>
+                </span>
+            </div>
         </div>
 
 

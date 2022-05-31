@@ -5,7 +5,9 @@ import br.com.businessshow.dao.implementacoes.ImagemDao;
 import br.com.businessshow.dao.implementacoes.ProdutoDao;
 import br.com.businessshow.entidades.Imagem;
 import br.com.businessshow.entidades.Produto;
+import br.com.businessshow.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,9 +19,10 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.servlet.http.HttpSession;
 
 @Controller
+@Scope("session")
 @RequestMapping("/produto")
 public class ProdutoController {
 
@@ -66,7 +69,7 @@ public class ProdutoController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@Valid @ModelAttribute("objproduto") Produto objproduto, BindingResult result, ModelMap model,  @RequestParam("image") List<MultipartFile> image) {
+    public String salvar(@Valid @ModelAttribute("objproduto") Produto objproduto, BindingResult result, ModelMap model,  @RequestParam("image") List<MultipartFile> image, HttpSession session) {
         if(objproduto.getCategoria().getId() == 0)
             result.addError(new FieldError("objproduto", "categoria", "Selecione uma Categoria."));
 
@@ -90,6 +93,7 @@ public class ProdutoController {
 
         if(objproduto.getId()==null){
             objproduto.setDataCriacao(LocalDateTime.now());
+            objproduto.setEmpresa(((Usuario)session.getAttribute("usuario")).getEmpresa());
             dao.save(objproduto);
         }
         else{
@@ -97,6 +101,7 @@ public class ProdutoController {
             if(listImagem.size() < 1 ){
                 objproduto.setListaImagem(existente.getListaImagem());
             }
+            objproduto.setEmpresa(existente.getEmpresa());
             objproduto.setDataCriacao(existente.getDataCriacao());
             dao.update(objproduto);
         }

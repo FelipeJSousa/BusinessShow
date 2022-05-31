@@ -2,7 +2,6 @@ package br.com.businessshow.controller;
 
 import br.com.businessshow.dao.implementacoes.ProdutoDao;
 import br.com.businessshow.dao.implementacoes.UsuarioDao;
-import br.com.businessshow.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;

@@ -10,14 +10,14 @@
     <div th:include="layout :: header"></div>
     <h1 class="m-4">Business Show - Home</h1>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row d-flex justify-content-center">
-            <div class="card m-2 col-3" style="width: 18rem;" th:each="p : ${listaProduto}">
+            <div class="card me-4 mb-4 col-sm-10  col-md-5 col-lg-2 p-2" th:each="p : ${listaProduto}">
                 <img th:if="${p?.getListaImagem()?.size() > 0}" th:src="@{'/imagem/'+ ${p?.getListaImagem()?.get(0)?.getId()}}" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${p.nome}"></h5>
                     <p class="card-text" th:text="${p.getDescricaoLonga()}"></p>
-                    <a href="#" class="btn btn-primary">visualizar</a>
+                    <a th:href="@{'/produto/detalhes?id='+ ${p?.getId()}}" class="btn btn-primary">visualizar</a>
                 </div>
             </div>
         </div>

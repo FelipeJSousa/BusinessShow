@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Show - Produto</title>
+    <th:block th:include="layout :: head"/>
+</head>
+<body>
+    <div th:include="layout :: header"></div>
+
+    <div class="container">
+
+        <div class="row mb-2">
+            <div id="produtoCarousel" class="carousel slide col-12" data-bs-ride="true">
+                <div class="carousel-indicators h-auto">
+                    <button type="button"
+                            aria-current="true"
+                            data-bs-target="#produtoCarousel"
+                            th:class="${produtoObj.getListaImagem().indexOf(p)} == 0 ? 'active' : ''"
+                            th:data-bs-slide-to="${produtoObj.getListaImagem().indexOf(p)}"
+                            th:aria-label="'Slide ' + ${produtoObj.getListaImagem().indexOf(p)}"
+                            th:if="${produtoObj?.getListaImagem()?.size() > 0}"
+                            th:each="p : ${produtoObj?.getListaImagem()}"
+                            style="filter: brightness(0.0)">
+                    </button>
+                </div>
+                <div class="carousel-inner bg-dark bg-opacity-10 h-auto" style="min-height: 22rem; max-height: 22rem">
+                    <div th:if="${produtoObj?.getListaImagem()?.size() > 0}"
+                         th:class="${produtoObj.getListaImagem().indexOf(p)} == 0 ? 'p-2 carousel-item active' : 'p-2 carousel-item'"
+                         th:each="p : ${produtoObj.getListaImagem()}">
+
+                        <img th:if="${produtoObj?.getListaImagem()?.size() > 0}"
+                             th:src="@{'/imagem/'+ ${p?.getId()}}"
+                             class="mx-auto d-block img-fluid" style="max-height: 18rem">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#produtoCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: brightness(0.0)"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#produtoCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: brightness(0.0)"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="col-12 mb-2">
+                <h2 th:text="${produtoObj.Nome}"></h2>
+            </span>
+        </div>
+        <div class="row mb-4">
+            <span class="col-6" th:text="${produtoObj.Descricao}"></span>
+            <span class="col-6" th:text="'R$ ' + ${produtoObj.Valor}"></span>
+        </div>
+
+
+        <div th:include="layout :: footer"></div>
+    </div>
+
+    <div th:include="layout :: scripts"></div>
+</body>
+</html>

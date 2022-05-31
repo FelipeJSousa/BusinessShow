@@ -58,6 +58,13 @@ public class ProdutoController {
         return "/produto/listar";
     }
 
+    @GetMapping("/detalhes")
+    public String detalhe(@RequestParam("id") int id, ModelMap model){
+        var objproduto = dao.findById(id);
+        model.addAttribute("produtoObj", objproduto);
+        return "/produto/detalhes";
+    }
+
     @PostMapping("/salvar")
     public String salvar(@Valid @ModelAttribute("objproduto") Produto objproduto, BindingResult result, ModelMap model,  @RequestParam("image") List<MultipartFile> image) {
         if(objproduto.getCategoria().getId() == 0)

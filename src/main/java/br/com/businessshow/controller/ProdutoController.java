@@ -8,6 +8,8 @@ import br.com.businessshow.entidades.Produto;
 import br.com.businessshow.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -59,6 +61,12 @@ public class ProdutoController {
     public String listar(ModelMap model) {
         model.addAttribute("lista", dao.getAtivos());
         return "/produto/listar";
+    }
+
+    @GetMapping("/busca")
+    public ResponseEntity<Object> BuscaProduto(@ModelAttribute("produtoObj") Produto produto, ModelMap model, @RequestParam("termo") String termo){
+        var busca = dao.getPorTermo(termo);
+        return new ResponseEntity<Object>(busca, HttpStatus.OK);
     }
 
     @GetMapping("/detalhes")

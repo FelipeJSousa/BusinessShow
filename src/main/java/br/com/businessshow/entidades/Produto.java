@@ -6,12 +6,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="produtos")
 public class Produto extends AbstractEntity<Integer>  {
-	
+
 	@Column(name = "nome", length = 150, nullable = false)
     private String nome;
 

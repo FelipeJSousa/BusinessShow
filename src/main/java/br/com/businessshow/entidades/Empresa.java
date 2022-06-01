@@ -47,11 +47,11 @@ public class Empresa extends AbstractEntity<Integer>{
         this.email = email;
     }
 
-    public List<Imagem> getListaParceiro() {
+    public List<Parceiro> getListaParceiro() {
         return listaParceiro;
     }
 
-    public void setListaParceiro(List<Imagem> listaParceiro) {
+    public void setListaParceiro(List<Parceiro> listaParceiro) {
         this.listaParceiro = listaParceiro;
     }
 
@@ -78,7 +78,7 @@ public class Empresa extends AbstractEntity<Integer>{
                     CascadeType.MERGE
             })
     @JoinTable(name = "empresaparceiro")
-    private List<Imagem> listaParceiro;
+    private List<Parceiro> listaParceiro;
 
 
     @OneToMany(mappedBy = "empresa")

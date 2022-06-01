@@ -8,4 +8,5 @@ public interface IProdutoDao  extends IDao<Produto> {
 
     List<Produto> getAtivos();
 
+    List<Produto> getPorTermo(String termo);
 }

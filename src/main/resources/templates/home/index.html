@@ -2,14 +2,52 @@
 <html lang="en">
 <head>
     <th:block th:include="layout :: head"/>
+    <link rel="stylesheet" th:href="@{/css/home/main.css}">
     <title>Business Show</title>
 </head>
 </head>
 <body>
 
-<div th:include="layout :: header"></div>
-<h1 class="m-4">Business Show - Home</h1>
-<div th:include="layout :: footer"></div>
-<div th:include="layout :: scripts"></div>
+    <div th:include="layout :: header"></div>
+    <h1 class="m-4">Business Show - Home</h1>
+
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center mb-4">
+            <div class="col-sm-6 col-12">
+                <div class="input-group">
+                    <span class="input-group-text bg-success" id="buscaIcon">
+                        <i class="bi bi-search text-white"></i>
+                    </span>
+                    <input type="text" placeholder="Pesquisar produto..." class="form-control" aria-describedby="buscaIcon" onkeyup="BuscarTermo(event)">
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center lista-produtos">
+            <div class="card me-4 mb-4 col-sm-10  col-md-5 col-lg-3 p-2" th:each="p : ${listaProduto}">
+                <img th:if="${p?.getListaImagem()?.size() > 0}" th:src="@{'/imagem/'+ ${p?.getListaImagem()?.get(0)?.getId()}}" class="card-img-top mx-auto" style="width: auto; max-height: 10rem;min-height: 10rem">
+                <div class="card-body">
+                    <span class="badge rounded-pill text-bg-success" th:text="${p.getCategoria().nome}"></span>
+                    <span class="d-flex justify-content-between">
+                        <h5 class="card-title my-4 me-2 col text-start" th:text="${p.nome}"></h5>
+                        <h5 class="card-title my-4 col text-end" th:text="'R$ ' + ${p.valor}"></h5>
+                    </span>
+                    <span class="d-flex justify-content-end">
+                        <a th:href="@{'/produto/detalhes?id='+ ${p?.getId()}}" class="btn btn-outline-success d-flex w-50 align-self-end justify-content-center">visualizar</a>
+                    </span>
+                </div>
+                <div class="card-footer">
+                    <span class="d-flex justify-content-between">
+                        <p th:text="'Qtde: ' + ${p.getQtde()}" class="text-start p-0 m-0"></p>
+                        <p th:text="'Data: ' + ${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}" class="text-end p-0 m-0"></p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script th:src="@{/js/home/main.js}"></script>
+    <div th:include="layout :: footer"></div>
+    <div th:include="layout :: scripts"></div>
 </body>
 </html>

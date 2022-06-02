@@ -14,6 +14,55 @@ public class Empresa extends AbstractEntity<Integer>{
     @Column(name="descricao", length = 150 )
     private String descricao;
 
+    @Column(name="whatsapp", length = 20 )
+    private String whatsapp;
+
+    @Column(name="telefone", length = 20 )
+    private String telefone;
+
+    @Column(name="email", length = 50 )
+    private String email;
+
+    public String getWhatsapp() {
+        return whatsapp;
+    }
+
+    public void setWhatsapp(String whatsapp) {
+        this.whatsapp = whatsapp;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Parceiro> getListaParceiro() {
+        return listaParceiro;
+    }
+
+    public void setListaParceiro(List<Parceiro> listaParceiro) {
+        this.listaParceiro = listaParceiro;
+    }
+
+    public List<Produto> getListaProduto() {
+        return listaProduto;
+    }
+
+    public void setListaProduto(List<Produto> listaProduto) {
+        this.listaProduto = listaProduto;
+    }
+
     @Column(name="dataCriacao", columnDefinition = "TIMESTAMP")
     private LocalDateTime dataCricao;
 
@@ -23,13 +72,18 @@ public class Empresa extends AbstractEntity<Integer>{
     @OneToMany(mappedBy = "empresa")
     private List<Usuario> listaUsuario;
 
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            })
-//    @JoinTable(name = "empresaparceiro")
-//    private List<Imagem> listaParceiro;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "empresaparceiro")
+    private List<Parceiro> listaParceiro;
+
+
+    @OneToMany(mappedBy = "empresa")
+    private List<Produto> listaProduto;
+
 
     public List<Usuario> getListaUsuario() {
         return listaUsuario;

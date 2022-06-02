@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <th:block th:include="layout :: head"/>
+    <link rel="stylesheet" th:href="@{/css/home/main.css}">
     <title>Business Show</title>
 </head>
 </head>
@@ -11,7 +12,17 @@
     <h1 class="m-4">Business Show - Home</h1>
 
     <div class="container-fluid">
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center mb-4">
+            <div class="col-sm-6 col-12">
+                <div class="input-group">
+                    <span class="input-group-text bg-success" id="buscaIcon">
+                        <i class="bi bi-search text-white"></i>
+                    </span>
+                    <input type="text" placeholder="Pesquisar produto..." class="form-control" aria-describedby="buscaIcon" onkeyup="BuscarTermo(event)">
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center lista-produtos">
             <div class="card me-4 mb-4 col-sm-10  col-md-5 col-lg-3 p-2" th:each="p : ${listaProduto}">
                 <img th:if="${p?.getListaImagem()?.size() > 0}" th:src="@{'/imagem/'+ ${p?.getListaImagem()?.get(0)?.getId()}}" class="card-img-top mx-auto" style="width: auto; max-height: 10rem;min-height: 10rem">
                 <div class="card-body">
@@ -34,6 +45,8 @@
         </div>
     </div>
 
+
+    <script th:src="@{/js/home/main.js}"></script>
     <div th:include="layout :: footer"></div>
     <div th:include="layout :: scripts"></div>
 </body>

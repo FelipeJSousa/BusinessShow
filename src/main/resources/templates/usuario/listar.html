@@ -2,22 +2,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-  	<th:block th:include="layout :: head"/>
-    <title>Categorias</title>
+	<th:block th:include="layout :: head"/>
+	<title>Usuarios</title>
   </head>
   <body>
     <div th:include="layout :: header"></div>
     <div class="container">
 	<h2>Listar</h2>
 
-	<a class="btn btn-primary btn-lg m-3" role="button" aria-disabled="true" href="/categoria/new">Novo</a>
-
+	<a class="btn btn-primary btn-lg m-3" role="button" aria-disabled="true" href="/usuario/new">Novo</a>
 
 	<table class="table">
 		<thead>
 		    <th>Código</th>
 		    <th>Nome</th>
-		    <th>Descrição</th>
+		    <th>Email</th>
+		    <th>CPF</th>
+		    <th>Empresa</th>
+		    <th>Administrador</th>
 		    <th>Data Criacao</th>
 		    <th>Data Alteracao</th>
 		    <th></th>
@@ -26,12 +28,15 @@
 		<tbody>
 			<tr th:each="p : ${lista}">
 				<td th:text="${p.id}"></td>
-				<td th:text="${p.nome}"></td>
-				<td th:text="${p.descricao}"></td>
+				<td th:text="${p.nome} + ' ' + ${p.sobrenome}"></td>
+				<td th:text="${p.email}"></td>
+				<td th:text="${p.cpf}"></td>
+				<td th:text="${p.empresa?.nome}"></td>
+				<td th:text="${p.admin} ? 'Sim' : 'Não'"></td>
 				<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}" ></td>
 				<td th:text="${#temporals.format(p.dataAlteracao, 'dd/MM/yyyy')}" ></td>
-				<td><a th:href="@{/categoria/prealterar(id=${p.id})}">Alterar</a></td>
-				<td><a th:href="@{/categoria/excluir(id=${p.id})}">Excluir</a></td>
+				<td><a th:href="@{/usuario/prealterar(id=${p.id})}">Alterar</a></td>
+				<td><a th:href="@{/usuario/excluir(id=${p.id})}">Excluir</a></td>
 			</tr>
 		</tbody>
 	</table>

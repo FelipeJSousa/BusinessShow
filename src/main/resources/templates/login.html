@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <th:block th:include="layout :: head"/>
+        <title>Business Show</title>
+    </head>
+    <body>
+        <div class="container p-5 my-2 align-items-center">
+            <div class="card col-8 shadow-sm mb-3 m-2 p-2 mx-auto">
+
+            <h1 class="p-3 w-100 text-center">Business Show</h1>
+            <h3 class="w-100 text-center">Login</h3>
+                <form class="form-group px-5 d-flex flex-column align-items-center" th:action="@{/login}" method="post">
+                    <div class="row my-1">
+                        <label for="username">E-mail</label>
+                        <input class="form-control px-5" type="username" id="username" name="username"/>
+                    </div>
+                    <div class="row my-1">
+                        <label for="password">Senha</label>
+                        <input class="form-control px-5" type="password" id="password" name="password"/>
+                    </div>
+                    <div class="row my-1">
+                        <p th:if="${mensagem != null}" th:text="${mensagem}"/>
+                    </div>
+                    <div class="row my-1 p-2">
+                        <button  type="submit" class="btn btn-primary">Entrar</button>
+                    </div>
+                </form>
+            </div>
+            <div th:include="layout :: footer"></div>
+        </div>
+
+        <div th:include="layout :: scripts"></div>
+    </body>
+</html>

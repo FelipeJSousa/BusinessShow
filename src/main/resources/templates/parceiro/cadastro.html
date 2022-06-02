@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+	<th:block th:include="layout :: head"/>
+    <title>Parceiro - Cadastro</title>
+  </head>
+  <body>
+    <div th:include="layout :: header"></div>
+    <div class="container">
+	<h2>Parceiro</h2>
+	
+	<form th:object="${objparceiro}" method="post" th:action="@{/parceiro/salvar}">
+		<div class="row">
+			<div class="form-group col-12">
+				<label>Razao Social</label>
+				<input th:field="*{razaoSocial}" type="text" class="form-control"
+				   placeholder="Informe a razao social."
+				   th:classappend="${#fields.hasErrors('razaoSocial')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{razaoSocial}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12">
+				<label>Nome Fantasia</label>
+				<input th:field="*{nomeFantasia}" type="text" class="form-control"
+					placeholder="Informe o nome fantasia"
+					th:classappend="${#fields.hasErrors('nomeFantasia')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{nomeFantasia}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12">
+				<label>Cnpj</label>
+				<input th:field="*{cnpj}" type="text" class="form-control"
+					placeholder="Informe o cnpj"
+					th:classappend="${#fields.hasErrors('cnpj')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{cnpj}"></p></span>
+				</div>
+			</div>
+		</div>
+
+		<input type="hidden" th:field="*{id}"/>
+		
+		<div class="row">
+			<div class="form-group col-12">
+				<input type="submit" class="btn btn-info"
+				value="Salvar"/>
+			</div>
+		</div>
+	</form>
+	
+
+
+	 <div th:include="layout :: footer"></div>
+	 </div>
+
+	<div th:include="layout :: scripts"></div>
+  </body>
+</html>

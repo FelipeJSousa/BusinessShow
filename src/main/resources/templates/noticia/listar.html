@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<th:block th:include="layout :: head"/>
+	<title>Noticias</title>
+</head>
+<body>
+<div th:include="layout :: header"></div>
+<div class="container">
+	<h2 th:class="${session.usuario.admin} == false ? 'mb-5' : '' ">Noticias</h2>
+
+	<a th:if="${session.usuario.admin} == true" class="btn btn-primary btn-lg m-3" role="button" aria-disabled="true" href="/noticia/new">Novo</a>
+
+
+	<table class="table">
+		<thead>
+		<th>Código</th>
+		<th>Título</th>
+		<th th:if="${session.usuario.admin} == true">Ativo</th>
+		<th>Data Criacao</th>
+		<th th:if="${session.usuario.admin} == true">Data Alteracao</th>
+		<th></th>
+		<th th:if="${session.usuario.admin} == true"></th>
+		<th th:if="${session.usuario.admin} == true"></th>
+		</thead>
+		<tbody>
+		<tr th:each="p : ${lista}">
+			<td th:text="${p.id}"></td>
+			<td th:text="${p.titulo}"></td>
+			<td th:if="${session.usuario.admin} == true" th:text="${p.ativo} ? 'Sim' : 'Não'"></td>
+			<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}" ></td>
+			<td th:if="${session.usuario.admin} == true" th:text="${#temporals.format(p.dataAlteracao, 'dd/MM/yyyy')}"></td>
+			<td><a th:href="@{/noticia/visualizar(id=${p.id})}">Visualizar</a></td>
+			<td th:if="${session.usuario.admin} == true"><a th:href="@{/noticia/prealterar(id=${p.id})}">Alterar</a></td>
+			<td th:if="${session.usuario.admin} == true"><a th:href="@{/noticia/excluir(id=${p.id})}">Excluir</a></td>
+		</tr>
+		</tbody>
+	</table>
+	<div th:include="layout :: footer"></div>
+</div>
+
+
+<div th:include="layout :: scripts"></div>
+</body>
+</html>

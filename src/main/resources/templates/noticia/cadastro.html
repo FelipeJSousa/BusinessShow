@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+	<th:block th:include="layout :: head"/>
+    <title>Noticia - Cadastro</title>
+  </head>
+  <body>
+    <div th:include="layout :: header"></div>
+    <div class="container">
+	<h2>Noticia</h2>
+	
+	<form th:object="${objnoticia}" method="post" th:action="@{/noticia/salvar}" enctype="multipart/form-data">
+		<div class="row">
+			<div class="form-group col-12">
+				<label>Título</label>
+				<input th:field="*{titulo}" type="text" class="form-control"
+				   placeholder="Informe o título."
+				   th:classappend="${#fields.hasErrors('titulo')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{titulo}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-12">
+				<label>Conteúdo</label>
+				<textarea th:field="*{conteudo}" maxlength="4000" class="form-control"
+						  placeholder="Informe o conteúdo."
+						  th:classappend="${#fields.hasErrors('conteudo')} ? 'is-invalid'"
+				/>
+				<div class="invalid-feedback">
+					<span><p th:errors="*{conteudo}"></p></span>
+				</div>
+			</div>
+		</div>
+		<div class="row my-2">
+			<span id="imgpreview" style="max-height: 8rem">
+				<span th:each="i : *{listaImagem}">
+					<img th:src="@{'/imagem/'+ ${i.id}}" class="img-thumbnail rounded col-2 h-100 me-3">
+				</span>
+			</span>
+			<span>
+				<label for="image" class="btn btn-outline-primary col-3 d-flex d-inline align-items-center">
+					<i class="bi bi-plus-square fs-4 me-2"></i>
+					<p class="text-center p-0 m-0">Adicionar imagem do produto</p>
+				</label>
+				<input type="file" id="image" name="image" class="d-none" multiple="multiple" accept=".png, .jpg, .jpeg" onchange="previewFile()"/>
+			</span>
+		</div>
+
+		<div th:if="${objnoticia.id} > 0" class="form-check col-4 d-flex align-items-center">
+			<input th:field="*{ativo}" name="ativo" th:checked="${ativo}" type="checkbox" class="form-check-input align-self-center"
+				   th:classappend="${#fields.hasErrors('ativo')} ? 'is-invalid'"
+				   id="ativo"
+			/>
+			<label class="form-check-label ms-1" for="ativo">
+				Ativo
+			</label>
+			<div class="invalid-feedback">
+				<span><p th:errors="*{ativo}"></p></span>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="form-group col-12">
+				<input type="submit" class="btn btn-info"
+				value="Salvar"/>
+			</div>
+		</div>
+	</form>
+
+
+ 	<script th:src="@{/js/noticia/main.js}"></script>
+	 <div th:include="layout :: footer"></div>
+	 </div>
+
+	<div th:include="layout :: scripts"></div>
+  </body>
+</html>

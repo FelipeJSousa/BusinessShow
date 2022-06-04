@@ -10,8 +10,8 @@
 
     <div class="container">
 
-        <div class="row mb-2">
-            <div id="noticiaCarousel" class="carousel slide col-12" data-bs-ride="true">
+        <div class="row mb-2" th:class="${noticiaObj?.getListaImagem()?.size()} > 0 ? '' : 'm-5'">
+            <div id="noticiaCarousel" class="carousel slide col-12" data-bs-ride="true" th:if="${noticiaObj?.getListaImagem()?.size() > 0}">
                 <div class="carousel-indicators h-auto">
                     <button type="button"
                             aria-current="true"

@@ -50,7 +50,7 @@
 			</span>
 		</div>
 
-		<div th:if="${objnoticia.id} > 0" class="form-check col-4 d-flex align-items-center">
+		<div th:if="${objnoticia?.id} != null and ${objnoticia?.id} > 0" class="form-check col-4 d-flex align-items-center">
 			<input th:field="*{ativo}" name="ativo" th:checked="${ativo}" type="checkbox" class="form-check-input align-self-center"
 				   th:classappend="${#fields.hasErrors('ativo')} ? 'is-invalid'"
 				   id="ativo"
@@ -63,7 +63,7 @@
 			</div>
 		</div>
 
-
+		<input type="hidden" th:field="*{id}"/>
 		<div class="row">
 			<div class="form-group col-12">
 				<input type="submit" class="btn btn-info"

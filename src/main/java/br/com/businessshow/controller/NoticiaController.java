@@ -37,10 +37,10 @@ public class NoticiaController {
         return "/noticia/cadastro";
     }
 
-    @GetMapping("/excluir")
-    public String excluir(@RequestParam("id") int id, ModelMap model, HttpSession session) {
+    @GetMapping("/ativardesativar")
+    public String ativarDesativar(@RequestParam("id") int id, ModelMap model, HttpSession session) {
         var existente = dao.findById(id);
-        existente.setAtivo(false);
+        existente.setAtivo(!existente.isAtivo());
         existente.setDataAlteracao(LocalDateTime.now());
         dao.update(existente);
         return listar(model, session);
@@ -70,18 +70,20 @@ public class NoticiaController {
 
         List<Imagem> listImagem = new ArrayList<>();
         for (MultipartFile file: image) {
-            var obj = this.salvarImagens(file);
-            listImagem.add(obj);
+            if(!file.isEmpty()){
+                var obj = this.salvarImagens(file);
+                listImagem.add(obj);
+            }
         }
 
         if(listImagem.size() > 0){
             objnoticia.setListaImagem(listImagem);
         }
 
-        objnoticia.setAtivo(true);
         objnoticia.setDataAlteracao(LocalDateTime.now());
 
         if(objnoticia.getId()==null){
+            objnoticia.setAtivo(true);
             objnoticia.setDataCriacao(LocalDateTime.now());
             dao.save(objnoticia);
         }

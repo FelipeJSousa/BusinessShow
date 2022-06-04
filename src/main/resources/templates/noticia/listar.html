@@ -33,7 +33,7 @@
 			<td th:if="${session.usuario.admin} == true" th:text="${#temporals.format(p.dataAlteracao, 'dd/MM/yyyy')}"></td>
 			<td><a th:href="@{/noticia/visualizar(id=${p.id})}">Visualizar</a></td>
 			<td th:if="${session.usuario.admin} == true"><a th:href="@{/noticia/prealterar(id=${p.id})}">Alterar</a></td>
-			<td th:if="${session.usuario.admin} == true"><a th:href="@{/noticia/excluir(id=${p.id})}">Excluir</a></td>
+			<td th:if="${session.usuario.admin} == true"><a th:href="@{/noticia/ativardesativar(id=${p.id})}" th:text="${p.ativo} ? 'Desativar' : 'Ativar'"></a></td>
 		</tr>
 		</tbody>
 	</table>

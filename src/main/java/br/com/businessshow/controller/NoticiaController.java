@@ -53,7 +53,13 @@ public class NoticiaController {
 
     @GetMapping("/listar")
     public String listar(ModelMap model, HttpSession session) {
-        model.addAttribute("lista",((Usuario)session.getAttribute("usuario")).isAdmin() ? dao.findAll() : dao.getAtivos());
+        var user = (Usuario)session.getAttribute("usuario");
+        if(user != null){
+            model.addAttribute("lista", user.isAdmin() == true ? dao.findAll() : dao.getAtivos());
+        }
+        else{
+            model.addAttribute("lista", dao.getAtivos());
+        }
         return "/noticia/listar";
     }
 

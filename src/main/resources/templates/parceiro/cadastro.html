@@ -11,7 +11,7 @@
 	<h2>Parceiro</h2>
 	
 	<form th:object="${objparceiro}" method="post" th:action="@{/parceiro/salvar}">
-		<div class="row">
+		<div class="row my-3">
 			<div class="form-group col-12">
 				<label>Razao Social</label>
 				<input th:field="*{razaoSocial}" type="text" class="form-control"
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row my-3">
 			<div class="form-group col-12">
 				<label>Nome Fantasia</label>
 				<input th:field="*{nomeFantasia}" type="text" class="form-control"
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row my-3">
 			<div class="form-group col-12">
 				<label>Cnpj</label>
 				<input th:field="*{cnpj}" type="text" class="form-control"
@@ -50,9 +50,9 @@
 
 		<input type="hidden" th:field="*{id}"/>
 		
-		<div class="row">
+		<div class="row my-3">
 			<div class="form-group col-12">
-				<input type="submit" class="btn btn-info"
+				<input type="submit" class="btn btn-success"
 				value="Salvar"/>
 			</div>
 		</div>

@@ -54,7 +54,7 @@
                         </span>
                     </div>
                     <span class="align-items-center">
-                        <a th:if="${session?.usuario?.admin} == true" class="btn btn-outline-light" href="/logout"><i class="bi bi-box-arrow-left"></i> Sair</a>
+                        <a th:if="${session?.usuario} != null" class="btn btn-outline-light" href="/logout"><i class="bi bi-box-arrow-left"></i> Sair</a>
                         <a th:if="${session?.usuario?.admin} == null" class="btn btn-outline-light" href="/Login"><i class="bi bi-box-arrow-right"></i> Login</a>
                     </span>
                 </div>

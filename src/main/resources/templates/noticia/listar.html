@@ -10,7 +10,7 @@
 <div class="container">
 	<h2 th:class="${session?.usuario?.admin} == false ? 'mb-5' : '' ">Noticias</h2>
 
-	<a th:if="${session?.usuario?.admin} == true" class="btn btn-primary btn-lg m-3" role="button" aria-disabled="true" href="/noticia/new">Novo</a>
+	<a th:if="${session?.usuario?.admin} == true" class="btn btn-success btn-lg m-3" role="button" aria-disabled="true" href="/noticia/new">Novo</a>
 
 
 	<table class="table">

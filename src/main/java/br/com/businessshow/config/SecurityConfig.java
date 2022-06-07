@@ -24,11 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/home/**", "/noticia/visualizar?**", "/imagem/**", "/produto/detalhes?**").permitAll()
-                .antMatchers("/webjars/**", "/static/css/**", "/static/image/**", "/static/js/**").permitAll()
+                .antMatchers("/home/**", "/imagem/**", "/produto/detalhes**", "/produto/busca**", "/noticia/listar", "/noticia/visualizar**").permitAll()
+                .antMatchers("/webjars/**", "/css/**", "/image/**", "/js/**").permitAll()
                 .antMatchers("/", "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css").permitAll()
-                .antMatchers("/parceiro/**", "/categoria/**", "/usuario/**", "/produto/**").hasAuthority("GERENTE")
-                .antMatchers("/noticia/listar", "/noticia/visualizar", "/produto/detalhes").hasAuthority("USUARIO")
+                .antMatchers("/parceiro/**", "/categoria/**", "/usuario/**", "/produto/**", "/noticia/**").hasAuthority("GERENTE")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -88,6 +88,7 @@ public class UsuarioController {
             else {
                 objusuario.EncodeSenha();
             }
+            objusuario.setDataCriacao(existente.getDataCriacao());
             dao.update(objusuario);
         }
 

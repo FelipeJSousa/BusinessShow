@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Show - Noticia</title>
+    <th:block th:include="layout :: head"/>
+</head>
+<body>
+    <div th:include="layout :: header"></div>
+
+    <div class="container">
+
+        <div class="row mb-2" th:class="${noticiaObj?.getListaImagem()?.size()} > 0 ? '' : 'm-5'">
+            <div id="noticiaCarousel" class="carousel slide col-12" data-bs-ride="true" th:if="${noticiaObj?.getListaImagem()?.size() > 0}">
+                <div class="carousel-indicators h-auto">
+                    <button type="button"
+                            aria-current="true"
+                            data-bs-target="#noticiaCarousel"
+                            th:class="${noticiaObj.getListaImagem().indexOf(p)} == 0 ? 'active' : ''"
+                            th:data-bs-slide-to="${noticiaObj.getListaImagem().indexOf(p)}"
+                            th:aria-label="'Slide ' + ${noticiaObj.getListaImagem().indexOf(p)}"
+                            th:if="${noticiaObj?.getListaImagem()?.size() > 0}"
+                            th:each="p : ${noticiaObj?.getListaImagem()}"
+                            style="filter: brightness(0.0)">
+                    </button>
+                </div>
+                <div class="carousel-inner bg-dark bg-opacity-10 h-auto" style="min-height: 22rem; max-height: 22rem">
+                    <div th:if="${noticiaObj?.getListaImagem()?.size() > 0}"
+                         th:class="${noticiaObj.getListaImagem().indexOf(p)} == 0 ? 'p-2 carousel-item active' : 'p-2 carousel-item'"
+                         th:each="p : ${noticiaObj.getListaImagem()}">
+
+                        <img th:if="${noticiaObj?.getListaImagem()?.size() > 0}"
+                             th:src="@{'/imagem/'+ ${p?.getId()}}"
+                             class="mx-auto d-block img-fluid" style="max-height: 18rem">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#noticiaCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: brightness(0.0)"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#noticiaCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: brightness(0.0)"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="col-12 mb-2 d-flex justify-content-between gap-2">
+                <span class="badge rounded-pill text-bg-success bg-opacity-50 text-black col-3 fs-6" th:text="${#temporals.format(noticiaObj.getDataCriacao(), 'dd/MM/yyyy')}"></span>
+            </span>
+            <span class="col-12 mb-2 d-flex justify-content-between">
+                <h2 class="col" th:text="${noticiaObj.titulo}"></h2>
+            </span>
+        </div>
+        <div class="row mb-4 d-flex" style="min-height: 3rem">
+            <h5 class="col-12 fw-normal" th:text="${noticiaObj.conteudo}"></h5>
+        </div>
+
+        <div th:include="layout :: footer"></div>
+    </div>
+
+    <div th:include="layout :: scripts"></div>
+</body>
+</html>

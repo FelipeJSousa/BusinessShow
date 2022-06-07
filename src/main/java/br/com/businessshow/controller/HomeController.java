@@ -26,8 +26,8 @@ public class HomeController {
     }
 
     @GetMapping("")
-    public String index() {
-        return login();
+    public String index(ModelMap model, HttpSession session) {
+        return home(model, session);
     }
 
     @GetMapping("/forbiden")

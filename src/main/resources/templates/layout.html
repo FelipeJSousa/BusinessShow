@@ -28,16 +28,19 @@
                         <a class="nav-link active" href="/home/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/produto/listar">Produtos</a>
+                        <a class="nav-link" href="/produto/listar" th:if="${session?.usuario?.admin} == true">Produtos</a>
                     </li>
-                    <li class="nav-item" th:if="${session.usuario.admin} == true">
+                    <li class="nav-item" th:if="${session?.usuario?.admin} == true">
                         <a class="nav-link" href="/categoria/listar">Categorias</a>
                     </li>
-                    <li class="nav-item" th:if="${session.usuario.admin} == true">
+                    <li class="nav-item" th:if="${session?.usuario?.admin} == true">
                         <a class="nav-link" href="/parceiro/listar">Parceiros</a>
                     </li>
-                    <li class="nav-item" th:if="${session.usuario.admin} == true">
+                    <li class="nav-item" th:if="${session?.usuario?.admin} == true">
                         <a class="nav-link" href="/usuario/listar">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/noticia/listar">Notícias</a>
                     </li>
                 </ul>
                 <div class="text-light d-flex justify-content-lg-end justify-content-center align-items-center col-lg-5 col" >
@@ -45,13 +48,14 @@
                         <span class="text-light d-inline-flex me-3 align-items-center">
                             <i class="bi bi-person me-2"></i>
                             <span class="flex-column">
-                                <p class="m-0 text-center" style="font-size: 0.7rem" th:if="${session.usuario.admin} == true">Acesso Gerencial</p>
+                                <p class="m-0 text-center" style="font-size: 0.7rem" th:if="${session?.usuario?.admin} == true">Acesso Gerencial</p>
                                 <p class="m-0" th:text="${session.usuario?.nome} + ' ' + ${session.usuario?.sobrenome}"></p>
                             </span>
                         </span>
                     </div>
                     <span class="align-items-center">
-                        <a class="btn btn-outline-light" href="/logout"><i class="bi bi-box-arrow-left"></i> Sair</a>
+                        <a th:if="${session?.usuario} != null" class="btn btn-outline-light" href="/logout"><i class="bi bi-box-arrow-left"></i> Sair</a>
+                        <a th:if="${session?.usuario?.admin} == null" class="btn btn-outline-light" href="/Login"><i class="bi bi-box-arrow-right"></i> Login</a>
                     </span>
                 </div>
             </div>
